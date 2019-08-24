@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import TimerClass
 
 window = Tk()
@@ -13,17 +14,26 @@ def addInterval(separator):
     breakLabel.pack()
 
     breakEntry: Entry = Entry(separator)
+    breaks.append(breakEntry)
     breakEntry.pack()
 
     intervalLabel: Label = Label(separator, text="Enter interval time", bg="white")
     intervalLabel.pack()
 
     entry: Entry = Entry(separator)
+    intervals.append(entry)
     entry.pack()
 
 def saveInterval():
-    # newTimer: TimerClass = TimerClass()
-    print(entry.get())
+    messagebox.showinfo("Title", getIntervals())
+    w = Label(separator, text=intervals, bg="white")
+    w.pack()
+
+def getIntervals():
+    return [int(entry.get()) for entry in intervals]
+
+def getBreaks():
+    return [int(entry.get() for entry in breaks)]
 
 beginingLabel: Label = Label(window, text="Please enter as many sequences and intervals you like")
 beginingLabel.pack()
@@ -35,6 +45,7 @@ intervalLabel: Label = Label(separator, text="Enter interval time", bg="white")
 intervalLabel.pack()
 
 entry: Entry = Entry(separator)
+intervals.append(entry);
 entry.pack()
 
 addIntervalButton: Button = Button(separator, text="Add New Interval", command=lambda: addInterval(separator))
